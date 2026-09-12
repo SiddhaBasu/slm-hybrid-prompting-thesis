@@ -1,5 +1,5 @@
 # peek_prompts2.py
-# Runs prompts from prompts1.yaml across GSM8K and FinQA.
+# Runs prompts from prompts.yaml across GSM8K and FinQA.
 # - Removes "style" as an identifier; uses only prompt ID for reporting and aggregation.
 # - Implements per-item summary table (similar to original peek_prompts.py).
 # - Exact Match (EM) uses string-equality OR a very tight numeric match at 0.01% rel. error to avoid sig-fig false negatives.
@@ -306,7 +306,7 @@ def build_prompt_text(prompt_text: str, question: str, context: str, sigfig: int
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--prompts", default="prompts/prompts1.yaml", help="YAML file with prompt templates (list of {id, text}).")
+    ap.add_argument("--prompts", default="prompts/prompts.yaml", help="YAML file with prompt templates (list of {id, text}).")
     ap.add_argument("--model", default="granite3.3:8b", help="Ollama model name.")
     ap.add_argument("--gsm_path", default="data/unified/GSM8k_200.jsonl", help="Path to GSM8K jsonl.")
     ap.add_argument("--finqa_path", default="data/unified/finqa_100.jsonl", help="Path to FinQA jsonl.")
@@ -322,7 +322,7 @@ def main():
 
     prompts = load_yaml(args.prompts)
     if not isinstance(prompts, list):
-        raise ValueError("prompts1.yaml must be a list of prompt objects with 'id' and 'text'.")
+        raise ValueError("prompts.yaml must be a list of prompt objects with 'id' and 'text'.")
 
     gsm_items = [normalize_record(o) for o in read_jsonl_first_n(args.gsm_path, args.take_n)]
     fin_items = [normalize_record(o) for o in read_jsonl_first_n(args.finqa_path, args.take_n)]

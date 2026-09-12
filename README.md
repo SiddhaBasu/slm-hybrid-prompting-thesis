@@ -109,12 +109,55 @@ Three metric categories were used:
 ## Repository Structure
 
 ```
-slm-hybrid-prompting-thesis/
-├── prompts/          # Prompt templates for all four methods
-├── evaluation/       # Scoring and error attribution scripts
-├── results/          # Output data and performance summaries
-├── notebooks/        # Analysis and visualization notebooks
-└── thesis/           # Final thesis PDF
+slm-crossdomain-prompts/
+├── configs/
+│   └── run_config.yaml        # Model + decoding config for the active eval run
+├── data/
+│   ├── raw/                   # Downloaded FinQA / GSM8K source data
+│   └── unified/                # Normalized JSONL consumed by the eval harness
+├── prompts/
+│   └── prompts.yaml            # Direct / Self-Ask / PoT / Hybrid prompt templates
+├── scripts/
+│   ├── README.md                # Script-by-script description and pipeline flow
+│   ├── download_datasets.py    # Pulls and caches raw datasets
+│   ├── unify_datasets.py       # Normalizes raw data into data/unified/
+│   ├── run_ollama_eval.py      # Runs prompts against a local Ollama model
+│   ├── eval_metrics.py         # Computes accuracy/error metrics from run output
+│   ├── compare_prompts.py      # Sanity runner comparing Self-Ask vs. Direct
+│   └── peek_prompts*.py        # Iterative sanity/debug runners for all four methods
+├── outputs/                     # Run outputs, logs, and intermediate results
+│   ├── slm_results.csv
+│   ├── flows_result*.json
+│   ├── FINALDATA.csv
+│   ├── FINAL_OUTPUTS.txt
+│   ├── metrics.txt
+│   ├── outcomes10-21.txt
+│   ├── outputs10-21.txt
+│   ├── raws.json / raws1107.json
+│   └── revisedoutputs.txt
+├── docs/
+│   ├── model_list.md            # Models evaluated
+│   ├── parameter_info.md        # Decoding parameter notes
+│   └── run_commands.md          # Step-by-step commands to reproduce a run
+└── README.md
+```
+
+### Pipeline Flow
+
+See [`scripts/README.md`](scripts/README.md) for a full description of each script.
+
+```mermaid
+flowchart TD
+    A[download_datasets.py] -->|data/raw/*.jsonl| B[unify_datasets.py]
+    B -->|data/unified/*.jsonl| C[run_ollama_eval.py]
+    P[prompts/prompts.yaml] --> C
+    CFG[configs/run_config.yaml] --> C
+    C -->|outputs/slm_results.csv| D[eval_metrics.py]
+    D --> R[Accuracy / error report]
+
+    B -->|data/unified/*.jsonl| S["compare_prompts.py /\npeek_prompts*.py"]
+    P --> S
+    S -->|outputs/flows_result*.json| M[Manual review]
 ```
 
 ---

@@ -1,5 +1,5 @@
-# peek_prompts2.py
-# Runs prompts from prompts1.yaml across GSM8K and FinQA with extended metrics.
+# peek_prompts3.py
+# Runs prompts from prompts.yaml across GSM8K and FinQA with extended metrics.
 # Metrics reported per dataset × prompt_id:
 #   - avg relative numeric error
 #   - EM@tau at 0.1%, 1%, 5%
@@ -204,7 +204,7 @@ def rough_token_estimate(text: str) -> int:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--prompts", default="prompts/prompts1.yaml", help="YAML list of prompts with {id, text}.")
+    ap.add_argument("--prompts", default="prompts/prompts.yaml", help="YAML list of prompts with {id, text}.")
     ap.add_argument("--model", default="mistral:7b-instruct")
     ap.add_argument("--gsm_path", default="data/unified/GSM8k_200.jsonl")
     ap.add_argument("--finqa_path", default="data/unified/finqa_100.jsonl")
@@ -219,7 +219,7 @@ def main():
 
     prompts = load_yaml(args.prompts)
     if not isinstance(prompts, list):
-        raise ValueError("prompts1.yaml must be a list of objects with 'id' and 'text'.")
+        raise ValueError("prompts.yaml must be a list of objects with 'id' and 'text'.")
 
     gsm_items = [normalize_record(o) for o in read_jsonl_first_n(args.gsm_path, args.take_n)]
     fin_items = [normalize_record(o) for o in read_jsonl_first_n(args.finqa_path, args.take_n)]
