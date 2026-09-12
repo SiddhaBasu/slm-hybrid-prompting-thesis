@@ -33,6 +33,14 @@ These findings demonstrate that **well-designed prompting structures can offset 
 | Datasets | **GSM8K, FinQA** |
 | Hardware | **NVIDIA RTX 3080, 10GB VRAM** |
 
+<p align="center">
+  <img src="images/em_finqa.png" width="49%" alt="Exact Match Rate in FinQA Across All Models">
+  <img src="images/em_mathqa.png" width="49%" alt="Exact Match Rate in GSM8K Across All Models">
+</p>
+<p align="center">
+  <img src="images/combined_acc.png" width="70%" alt="Combined Accuracy per Second Across Both Domains">
+</p>
+
 ---
 
 ## Prompting Methods
