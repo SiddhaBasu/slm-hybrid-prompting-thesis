@@ -1,0 +1,231 @@
+- id: finance_program_v1
+  domain: finance
+  type: none
+  text: |
+    You are a financial analyst. Use the provided data and solve with a short formula.
+    If units or periods differ, align them. End with: Answer: <final>
+
+    Context (may be empty):
+    {CONTEXT}
+
+    Data (if present):
+    {NUMBERS_JSON}
+
+    Problem: {QUESTION}
+
+    Steps:
+    1) Select the correct formula.
+    2) Bind values from data/context.
+    3) Compute carefully.
+    4) Double-check units/periods.
+    Final line: Answer: <value [+ units/%]>
+
+- id: finance_program_v2
+  domain: finance
+  type: program
+  text: |
+    Write a single Python code block that, when executed, prints the final numerical answer with the correct unit. 
+    Do not explain your steps or output any text besides the final numeric result and unit.
+
+    Question:
+    <insert question text>
+
+    Program:
+    ```python
+    # Your code here
+
+- id: finance_selfask_v1
+  domain: finance
+  type: selfask
+  text: |
+    You are a financial analyst. Decompose and answer.
+    Problem: {QUESTION}
+    Context:
+    {CONTEXT}
+
+    Step 1: List sub-questions needed.
+    Step 2: Answer each sub-question using context numbers.
+    Step 3: Compare/compose and verify.
+    Final line: Answer: <final>
+
+- id: math_program_v1
+  domain: math
+  type: program
+  text: |
+    You are a careful mathematician. Solve via short formula.
+    Problem: {QUESTION}
+    Steps:
+    1) Define variables.
+    2) Write the formula.
+    3) Compute step by step.
+    Final line: Answer: <value>
+
+- id: math_selfask_v1
+  domain: math
+  type: selfask
+  text: |
+    Problem: {QUESTION}
+    Step 1: List sub-questions.
+    Step 2: Answer sub-questions.
+    Step 3: Combine into final result.
+    Final line: Answer: <value>
+
+- id: math_direct_prompt
+  domain: math
+  type: direct
+  text: |
+    {QUESTION}
+    Write output as: Answer: <value>
+
+- id: finance_direct_prompt
+  domain: finance
+  type: direct
+  text: |
+    {QUESTION}
+    Write output as: Answer: <value>
+
+- id: finance_hybrid_selfask_pot_v1
+  domain: finance
+  type: program
+  text: |
+    You are a careful financial reasoning assistant. Work in two phases.
+
+    PHASE A — SHORT DECOMPOSITION (Self-Ask):
+    • List the minimal sub-questions needed to solve the problem.
+    • Extract the exact numbers, units (%, $, millions/billions), and time periods from the context if given.
+    • Quote the specific row/period used when you pick values from a table.
+    Keep this brief.
+
+    PHASE B — PROGRAM-OF-THOUGHT (Python):
+    • Emit ONE fenced Python block that:
+      1) binds variables with the extracted values (convert units if needed),
+      2) computes the result using a clear formula (e.g., growth = (curr - prev)/prev),
+      3) prints ONLY the final numeric answer, formatted to {SIGFIG} significant figures.
+    • Allowed imports: math, statistics, re, fractions, decimal.
+    • Do not import os/sys/subprocess/requests/http or perform file/network I/O.
+
+    {CONTEXT}
+
+    Question: {QUESTION}
+
+    Now produce the Python block. After the block, do not write anything else.
+
+    ```python
+    # Helper to format to N significant figures without trailing noise.
+    from decimal import Decimal, getcontext
+
+    def fmt_sigfig(x: float, n: int) -> str:
+        # Use Decimal for stable rounding, then format to plain string
+        if x == 0:
+            return "0"
+        getcontext().prec = max(n + 2, 8)  # extra headroom
+        d = Decimal(str(x))
+        # Convert to scientific, round to n sig figs, then back to plain if feasible
+        s = f"{d:.{n-1}E}"  # e.g., '6.03E-1'
+        d2 = Decimal(s)
+        # Try plain form, falling back to scientific if needed
+        plain = f"{d2.normalize():f}"
+        # Strip trailing zeros and dot
+        plain = plain.rstrip("0").rstrip(".") if "." in plain else plain
+        # If plain is too long or loses clarity, keep scientific
+        try:
+            float(plain)
+            return plain
+        except:
+            return s
+
+    # === Bind values here (convert units if needed) ===
+    # Example:
+    # prev = 5312.0  # 2016 operating income, in millions USD
+    # curr = 6000.0  # 2017 operating income, in millions USD
+    # growth = (curr - prev) / prev        # proportion (e.g., 0.1295 for 12.95%)
+
+    # TODO: Replace the following with values extracted from the context above.
+    # YOUR BINDINGS AND COMPUTATION:
+    result = 0.0
+
+    # If the gold expects a percentage like "60.3%", multiply by 100 here:
+    # result = growth * 100
+
+    # === Print only the final numeric value, to {SIGFIG} significant figures ===
+    print(fmt_sigfig(result, {SIGFIG}))
+    ```
+
+- id: math_hybrid_selfask_pot_v1
+  domain: math
+  type: program
+  text: |
+    You are a precise math reasoning assistant. Work in two phases.
+
+    PHASE A — SHORT DECOMPOSITION (Self-Ask):
+    • Break the problem into minimal steps; note the quantities and relationships needed.
+    • Define variables that will be computed in code.
+
+    PHASE B — PROGRAM-OF-THOUGHT (Python):
+    • Emit ONE fenced Python block that:
+      1) assigns the quantities as floats/ints,
+      2) computes the final result,
+      3) prints ONLY the final numeric answer, formatted to {SIGFIG} significant figures.
+    • Allowed imports: math, statistics, re, fractions, decimal.
+
+    Question: {QUESTION}
+
+    Now produce the Python block. After the block, do not write anything else.
+
+    ```python
+    from decimal import Decimal, getcontext
+
+    def fmt_sigfig(x: float, n: int) -> str:
+        if x == 0:
+            return "0"
+        getcontext().prec = max(n + 2, 8)
+        d = Decimal(str(x))
+        s = f"{d:.{n-1}E}"
+        d2 = Decimal(s)
+        plain = f"{d2.normalize():f}"
+        plain = plain.rstrip("0").rstrip(".") if "." in plain else plain
+        try:
+            float(plain)
+            return plain
+        except:
+            return s
+
+    # === Assign problem variables and compute the result ===
+    # Example:
+    # apples_morning = 24
+    # apples_afternoon = 31
+    # total = apples_morning + apples_afternoon
+    # result = total
+
+    # TODO: Replace with your computation
+    result = 0
+
+    print(fmt_sigfig(result, {SIGFIG}))
+    ```
+
+- id: finance_hybrid_selfask_pot_v2
+  domain: finance
+  type: program
+  text: |
+    You are a careful financial reasoning assistant. Work in two phases.
+
+    PHASE A — SHORT DECOMPOSITION (Self-Ask):
+    • List the minimal sub-questions needed to solve the problem.
+    • Extract the exact numbers, units (%, $, millions/billions), and time periods from the context if given.
+    • Quote the specific row/period used when you pick values from a table.
+    Keep this brief.
+
+    PHASE B — PROGRAM-OF-THOUGHT (Python):
+    • Emit ONE fenced Python block that:
+      1) binds variables with the extracted values (convert units if needed),
+      2) computes the result using a clear formula (e.g., growth = (curr - prev)/prev),
+      3) prints ONLY the final numeric answer, formatted to {SIGFIG} significant figures.
+    • Allowed imports: math, statistics, re, fractions, decimal.
+    • Do not import os/sys/subprocess/requests/http or perform file/network I/O.
+
+    {CONTEXT}
+
+    Question: {QUESTION}
+
+    Now produce the Python block. After the block, do not write anything else.
+    ```

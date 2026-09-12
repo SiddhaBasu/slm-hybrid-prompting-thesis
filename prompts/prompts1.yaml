@@ -1,0 +1,50 @@
+- id: direct_prompt
+  text: |
+    Question: {QUESTION}
+    Context (may be empty): {CONTEXT}
+
+    Write output as: Answer: <value>
+
+- id: program_of_thought
+  text: |
+    Question: {QUESTION}
+    Context (may be empty): {CONTEXT}
+    
+    Write a single Python code block that, when executed, prints the final numerical answer with the correct unit. 
+    Do not explain your steps or output any text besides the final numeric result and unit.
+
+    Program:
+    ```python
+    # Your code here
+
+- id: self_ask
+  text: |
+    Problem: {QUESTION}
+    Context (may be empty): {CONTEXT}
+
+    Step 1: List sub-questions.
+    Step 2: Answer sub-questions.
+    Step 3: Combine into final result.
+    Final line: Answer: <value>
+
+- id: hybrid_v2
+  text: |
+    Problem: {QUESTION}
+    Context (may be empty): {CONTEXT}
+
+    Work in two phases.
+
+    PHASE 1 — SHORT DECOMPOSITION:
+      Step 1: List sub-questions.
+      Step 2: Answer sub-questions.
+      Step 3: Combine into final result.
+    Remember this information for reference.
+
+    PHASE 2 — PROGRAM-OF-THOUGHT:
+      Write a single Python code block that, when executed, prints the final numerical answer with the correct unit. 
+      Do not explain your steps or output any text besides the final numeric result and unit.
+
+    Program:
+    ```python
+    # Your code here
+    

@@ -1,0 +1,117 @@
+{
+  "model": "mistral:7b-instruct",
+  "decoding": {
+    "num_ctx": 4096,
+    "num_predict": 512,
+    "temperature": 0.2,
+    "seed": 1234,
+    "sigfig": 3
+  },
+  "runs": [
+    {
+      "item_id": "gsm8k_hybrid_1",
+      "domain": "gsm8k",
+      "prompt_id": "math_hybrid_selfask_pot_v1",
+      "ptype": "program",
+      "style": "hybrid",
+      "pred": "18",
+      "gold": "18",
+      "correct_tol1pct": true,
+      "llm_latency": 5.232,
+      "py_latency": 0.048,
+      "latency_sec": 5.281
+    },
+    {
+      "item_id": "gsm8k_selfask_1",
+      "domain": "gsm8k",
+      "prompt_id": "math_selfask_v1",
+      "ptype": "selfask",
+      "style": "selfask",
+      "pred": "18",
+      "gold": "18",
+      "correct_tol1pct": true,
+      "llm_latency": 1.876,
+      "py_latency": 0.0,
+      "latency_sec": 1.876
+    },
+    {
+      "item_id": "gsm8k_direct_1",
+      "domain": "gsm8k",
+      "prompt_id": "math_direct_prompt",
+      "ptype": "direct",
+      "style": "direct",
+      "pred": "108",
+      "gold": "18",
+      "correct_tol1pct": false,
+      "llm_latency": 0.108,
+      "py_latency": 0.0,
+      "latency_sec": 0.108
+    },
+    {
+      "item_id": "gsm8k_program_1",
+      "domain": "gsm8k",
+      "prompt_id": "math_program_v1",
+      "ptype": "program",
+      "style": "program",
+      "pred": "3",
+      "gold": "18",
+      "correct_tol1pct": false,
+      "llm_latency": 2.192,
+      "py_latency": 0.0,
+      "latency_sec": 2.192
+    },
+    {
+      "item_id": "finqa_hybrid_1",
+      "domain": "finqa",
+      "prompt_id": "finance_hybrid_selfask_pot_v1",
+      "ptype": "program",
+      "style": "hybrid",
+      "pred": "127",
+      "gold": "127.40",
+      "correct_tol1pct": true,
+      "llm_latency": 4.273,
+      "py_latency": 0.048,
+      "latency_sec": 4.321
+    },
+    {
+      "item_id": "finqa_selfask_1",
+      "domain": "finqa",
+      "prompt_id": "finance_selfask_v1",
+      "ptype": "selfask",
+      "style": "selfask",
+      "pred": "0.1274",
+      "gold": "127.40",
+      "correct_tol1pct": false,
+      "llm_latency": 2.291,
+      "py_latency": 0.0,
+      "latency_sec": 2.291
+    },
+    {
+      "item_id": "finqa_direct_1",
+      "domain": "finqa",
+      "prompt_id": "finance_direct_prompt",
+      "ptype": "direct",
+      "style": "direct",
+      "pred": "2021",
+      "gold": "127.40",
+      "correct_tol1pct": false,
+      "llm_latency": 0.182,
+      "py_latency": 0.0,
+      "latency_sec": 0.182
+    },
+    {
+      "item_id": "finqa_program_1",
+      "domain": "finqa",
+      "prompt_id": "finance_program_v2",
+      "ptype": "program",
+      "style": "program",
+      "pred": "4.189",
+      "gold": "127.40",
+      "correct_tol1pct": false,
+      "llm_latency": 0.506,
+      "py_latency": 0.041,
+      "latency_sec": 0.547
+    }
+  ],
+  "buckets": {
+    

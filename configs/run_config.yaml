@@ -1,0 +1,26 @@
+experiment_name: week0_crossdomain_smoke
+
+model: mistral:7b-instruct      
+options:
+  temperature: 0.2
+  top_p: 0.9
+  top_k: 50
+  repeat_penalty: 1.05
+  num_ctx: 4096
+  num_predict: 512
+  seed: 1234
+
+self_consistency:
+  enabled: false
+  k: 1
+
+io:
+  inputs:
+    - data/unified/finqa_100.jsonl
+    - data/unified/gsm8k_200.jsonl
+  out_csv: outputs/slm_results.csv
+
+stop:
+  - "\nAnswer:\n"
+  - "\n\nAnswer:\n"
+  - "\nFinal line:"

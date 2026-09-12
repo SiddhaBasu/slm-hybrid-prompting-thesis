@@ -1,0 +1,120 @@
+Great question. Here’s a tight, practical menu of **additional metrics** to add, grouped by purpose, with how you’d compute them in your current harness (EM, tol-1% numeric match, and latency you already have).
+
+---
+
+## 1) Core accuracy (numeric-aware)
+
+* **Tol-ε Exact Match (Tol-EM@{ε})**: success if relative error ≤ ε (you use 1%; add 0.1%, 2%).
+  *Compute*: `abs(p−g)/max(|g|,τ) ≤ ε`.
+* **Abs/Rel Error (MAE, MRE, MAPE)**: for numeric tasks, report mean absolute / relative / percentage error.
+  *Compute*: `mean(|p−g|)`, `mean(|p−g|/max(|g|,τ))`, `mean(100*|p−g|/max(|g|,τ))`.
+* **Sign Error Rate**: fraction where `sign(p) ≠ sign(g)` (catches direction mistakes).
+* **Order-of-Magnitude Error Rate**: fraction where `|log10(|p|)−log10(|g|)| ≥ 1`.
+
+## 2) Formatting & unit correctness (cheap wins)
+
+* **Answer Type Match**: percent vs absolute vs currency detection matches gold.
+  *Compute*: check presence of `%`, `$`, unit tokens.
+* **Significant-Figures Match**: difference between printed sigfigs and reference (if specified).
+* **Unit-Consistency Score**: flag unit conversions (e.g., billions↔millions).
+  *Compute*: regex on context + output; simple heuristic counter.
+
+## 3) Program-of-Thought (code)–specific
+
+* **Code Block Extraction Rate**: % of completions with a single valid fenced `python` block.
+* **Execution Success Rate**: % of runs returning `rc==0` within timeout.
+* **Unsafe Import Violations**: count/rate of blocked patterns (os/sys/subprocess, I/O).
+* **PoT Answer Adoption**: when both text and code exist, % where final pred comes from code.
+* **PoT Runtime Breakdown**: avg LLM latency, Python latency, and their ratio.
+
+## 4) Decomposition / Self-Ask quality (automatic proxies)
+
+* **Step Count**: mean # of sub-questions (too high can correlate with drift).
+* **Step Diversity**: distinct sub-question n-grams (measures repetitive templates).
+* **Rationale-Final Consistency**: LLM-as-judge score (0–1) whether final answer follows from steps (optional—automated judging pass).
+
+## 5) Robustness & generalization
+
+* **Paraphrase Robustness (ΔEM)**: EM change under prompt/data paraphrases.
+  *Compute*: run a paraphrased version of the same item; report EM difference.
+* **Distractor Robustness**: add irrelevant numbers to context; measure EM drop.
+* **Cross-Domain Transfer Gap**: `(EM_in_domain − EM_cross_domain)` for your key prompts.
+* **Seed/Temperature Stability**: stddev of EM over k seeds / temperatures.
+* **Context-Length Sensitivity**: EM vs truncated/extended context (e.g., 25/50/100th percentiles of token count).
+
+## 6) Self-consistency (when you turn it on)
+
+* **pass@k**: correct if any of k samples is correct.
+* **Vote Accuracy**: majority vote over normalized numeric forms.
+* **Vote Entropy**: uncertainty proxy: `H = −∑ p_i log p_i` over binned numeric answers.
+
+## 7) Calibration (lightweight)
+
+* **Self-Reported Confidence ECE**: ask model for confidence (0–1), bucketed Expected Calibration Error against correctness.
+  *If no logits*: rely on a standardized “Confidence: x%” the model must output; parse and compute ECE.
+* **Brier Score**: `mean((conf − correct)^2)` using self-reported confidence.
+
+## 8) Efficiency & resource metrics
+
+* **Throughput**: items/sec.
+* **Token Efficiency**: avg input/output tokens (prompt length ≈ cost).
+* **VRAM/Memory Peaks**: simple polling or periodic logs (optional).
+* **Timeout Rate**: fraction exceeding your exec/generate time caps.
+
+## 9) Error taxonomy (actionable debugging)
+
+Label each failure into:
+
+* **Extraction error** (picked wrong numbers from context),
+* **Computation error** (formula/math wrong),
+* **Formatting error** (right value, wrong format),
+* **Code error** (syntax/unsafe import/timeout),
+* **Parsing error** (runner failed to extract answer).
+  *Compute*: simple rule-based heuristics + spot checks; report proportions.
+
+## 10) Human/LLM-judge qualitative (small sampled set)
+
+* **Faithfulness** (does rationale cite correct cells/lines?),
+* **Logical Validity** (no non-sequitur leaps),
+* **Hallucination Rate** (facts not in context).
+  Score 1–5 or yes/no on 50–100 sampled items to anchor your quantitative metrics.
+
+---
+
+### Where to put these in your harness
+
+* **Per-item logging**: extend your `rows` to include: `answer_type`, `sigfig_used`, `units_detected`, `has_codeblock`, `rc`, `unsafe_flag`, `step_count`, `tokens_in/out`.
+* **Bucket aggregations**: in `seek_prompts.py`, add sums/counters for each metric keyed by `(dataset, style)`. Print:
+
+  * Accuracy (EM, Tol-EM@1%, pass@k if enabled),
+  * Avg |p−g|, MAPE,
+  * Execution success rate,
+  * Formatting/unit match rate,
+  * Avg total latency,
+  * Seed/temperature std (if you sweep).
+
+---
+
+### Minimal formulas/snippets
+
+* **Relative error**:
+  `rel_err = abs(p - g) / max(abs(g), 1e-8)`
+* **Tol-EM@ε**:
+  `ok = rel_err <= ε`
+* **pass@k (self-consistency)**:
+  `ok = any(ok_i for i in 1..k); vote = mode(normalize_num(ans_i))`
+* **Vote entropy**:
+  `H = -sum(c_i/N * log(c_i/N))` over binned answers.
+* **ECE (10 bins)**:
+  bin predictions by confidence, compute `|acc_bin − conf_bin|`, weight by bin size.
+
+---
+
+### What to highlight in the paper
+
+Report, per dataset × style:
+
+* EM, **Tol-EM@1%**, **MAPE**, **Sign Error**, **Exec Success (PoT)**, **Format/Unit Match**, **Avg Total Latency**, **pass@k** (if used), **Cross-Domain Gap**, **Seed/Temp Stability**.
+  Add a **failure taxonomy plot** (stacked bars) and a **latency vs accuracy** Pareto chart.
+
+If you want, I can patch `seek_prompts.py` to compute a first cut of: Tol-EM@0.1/1/2%, MAE/MAPE, code-exec success, unit/type match, and an error taxonomy skeleton.

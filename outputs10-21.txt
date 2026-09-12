@@ -1,0 +1,987 @@
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py
+
+=== Running finance_selfask prompts on example finance questions ===
+Model: mistral:7b-instruct
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+item_id       prompt_id               pred            gold          ok@1%     latency
+----------------------------------------------------------------------------------------
+fin_demo1     finance_selfask_v1      16.74%          12.95%        False     2.757
+fin_demo2     finance_selfask_v1      60.3%           60.3%         True      1.816
+fin_demo3     finance_selfask_v1      2020            162           False     2.302
+
+Done. Tip: if outputs look verbose or pred != gold formatting, ensure your finance_selfask template enforces a single final line: 'Answer: <scalar>'.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py
+
+=== Running finance_selfask prompts on example finance questions ===
+Model: mistral:7b-instruct
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+item_id       prompt_id                 pred            gold          ok@1%     latency   
+------------------------------------------------------------------------------------------
+fin_demo1     finance_selfask_v1        13.14%          12.95%        False     4.769
+fin_demo2     finance_selfask_v1        60.3%           60.3%         True      1.817
+fin_demo3     finance_selfask_v1        2020            162           False     2.132
+
+Done. If outputs look verbose or pred != gold formatting, ensure your finance_selfask template enforces a single final line: 'Answer: <scalar>'.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json
+usage: peek_prompts.py [-h] [--prompts PROMPTS] [--model MODEL] [--num_ctx NUM_CTX] [--num_predict NUM_PREDICT] [--temperature TEMPERATURE] [--seed SEED] [--show_flow] [--save_json SAVE_JSON]
+peek_prompts.py: error: argument --save_json: expected one argument
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json ""
+usage: peek_prompts.py [-h] [--prompts PROMPTS] [--model MODEL] [--num_ctx NUM_CTX] [--num_predict NUM_PREDICT] [--temperature TEMPERATURE] [--seed SEED] [--show_flow] [--save_json SAVE_JSON]
+peek_prompts.py: error: argument --save_json: expected one argument
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json "raws.json"
+
+=== Running finance_selfask prompts on example finance questions ===
+Model: mistral:7b-instruct
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+item_id       prompt_id                 pred            gold          ok@1%     latency   
+------------------------------------------------------------------------------------------
+fin_demo1     finance_selfask_v1        16.74%          12.95%        False     2.856
+fin_demo2     finance_selfask_v1        60.3%           60.3%         True      2.119
+fin_demo3     finance_selfask_v1        2020            162           False     2.128
+
+Saved raw outputs to: raws.json
+
+Done. If outputs look verbose or pred != gold formatting, ensure your finance_selfask template enforces a single final line: 'Answer: <scalar>'.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json "raws.json"
+
+=== Running finance_selfask prompts on example finance questions ===
+Model: mistral:7b-instruct
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+item_id       prompt_id                 pred            gold          ok@1%     latency   
+------------------------------------------------------------------------------------------
+fin_demo1     finance_selfask_v1        16.74%          12.95%        False     2.76
+fin_demo2     finance_selfask_v1        60.3%           60.3%         True      2.111
+fin_demo3     finance_selfask_v1        2020            162           False     2.125
+
+Saved raw outputs to: raws.json
+
+Done. If outputs look verbose or pred != gold formatting, ensure your finance_selfask template enforces a single final line: 'Answer: <scalar>'.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json "raws.json" 
+
+=== Running finance_selfask prompts on example finance questions ===
+Model: llama3.1:8b
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+item_id       prompt_id                 pred            gold          ok@1%     latency   
+------------------------------------------------------------------------------------------
+fin_demo1     finance_selfask_v1        13%             12.95%        True      9.767
+fin_demo2     finance_selfask_v1        60.3%           60.3%         True      1.819
+fin_demo3     finance_selfask_v1        162             162           True      2.008
+
+Saved raw outputs to: raws.json
+
+Done. If outputs look verbose or pred != gold formatting, ensure your finance_selfask template enforces a single final line: 'Answer: <scalar>'.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json "raws.json"
+
+=== Running finance_selfask prompts on example finance questions ===
+Model: gemma3:4b
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+item_id       prompt_id                 pred            gold          ok@1%     latency   
+------------------------------------------------------------------------------------------
+fin_demo1     finance_selfask_v1        12.84%          12.95%        True      9.236
+fin_demo2     finance_selfask_v1        60.3%           60.3%         True      1.867
+fin_demo3     finance_selfask_v1        162             162           True      2.113
+
+Saved raw outputs to: raws.json
+
+Done. If outputs look verbose or pred != gold formatting, ensure your finance_selfask template enforces a single final line: 'Answer: <scalar>'.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json "raws.json"
+
+=== Running Self-Ask prompts on small mixed bench (GSM8K + FinQA) ===
+Model: mistral:7b-instruct
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+Running GSM8K (first 5 items) with math/selfask: math_selfask_v1
+
+Running FinQA (first 5 items) with finance/selfask: finance_selfask_v1
+
+=== Summary (ok@1% tolerance) ===
+item_id       domain    prompt_id                 pred            gold          ok@1%     latency
+----------------------------------------------------------------------------------------------------
+gsm8k_1       gsm8k     math_selfask_v1           338             18            False     7.108
+gsm8k_2       gsm8k     math_selfask_v1           3               3             True      1.369
+gsm8k_3       gsm8k     math_selfask_v1           65000           70000         False     1.687
+gsm8k_4       gsm8k     math_selfask_v1           3               540           False     1.354
+gsm8k_5       gsm8k     math_selfask_v1           16              64            False     2.789
+finqa_1       finqa     finance_selfask_v1        127.4           127.40        True      2.783
+finqa_2       finqa     finance_selfask_v1        70.8%           93.5%         False     4.628
+finqa_3       finqa     finance_selfask_v1        24.7%           24.69%        True      4.999
+finqa_4       finqa     finance_selfask_v1        2009            18.6          False     4.72
+finqa_5       finqa     finance_selfask_v1        60.23%          60.3%         True      3.671
+
+Saved raw outputs to: raws.json
+
+Done. Ensure your math/finance Self-Ask templates end with a single final line 'Answer: <scalar>' to keep extraction stable.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json "raws.json"
+
+=== Running Self-Ask prompts on small mixed bench (GSM8K + FinQA) ===
+Model: llama3.1:8b
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+Running GSM8K (first 5 items) with math/selfask: math_selfask_v1
+
+Running FinQA (first 5 items) with finance/selfask: finance_selfask_v1
+
+=== Summary (ok@1% tolerance) ===
+item_id       domain    prompt_id                 pred            gold          ok@1%     latency
+----------------------------------------------------------------------------------------------------
+gsm8k_1       gsm8k     math_selfask_v1           18              18            True      8.637
+gsm8k_2       gsm8k     math_selfask_v1           3               3             True      1.726
+gsm8k_3       gsm8k     math_selfask_v1           70000           70000         True      2.995
+gsm8k_4       gsm8k     math_selfask_v1           540             540           True      1.46
+gsm8k_5       gsm8k     math_selfask_v1           64              64            True      3.664
+finqa_1       finqa     finance_selfask_v1        127.4           127.40        True      2.286
+finqa_2       finqa     finance_selfask_v1        311.41%         93.5%         False     4.802
+finqa_3       finqa     finance_selfask_v1        24.69%          24.69%        True      2.819
+finqa_4       finqa     finance_selfask_v1        18.6            18.6          True      2.428
+finqa_5       finqa     finance_selfask_v1        60.2%           60.3%         True      2.656
+
+Saved raw outputs to: raws.json
+
+Done. Ensure your math/finance Self-Ask templates end with a single final line 'Answer: <scalar>' to keep extraction stable.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts>
+
+
+                                                                   python scripts/compare_prompts.py --save_json "raws.json"
+
+=== Running Self-Ask and Direct prompts on small mixed bench (GSM8K + FinQA) ===
+Model: mistral:7b-instruct
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+Running GSM8K (first 5 items) with math/selfask: math_selfask_v1
+Running GSM8K (first 5 items) with math/direct: math_direct_prompt
+
+Running FinQA (first 5 items) with finance/selfask: finance_selfask_v1
+Running FinQA (first 5 items) with finance/direct: finance_direct_prompt
+
+=== Summary (ok@1% tolerance) ===
+item_id               domain    ptype       prompt_id                     pred              gold            ok@1%     latency
+--------------------------------------------------------------------------------------------------------------------------------
+gsm8k_selfask_1       gsm8k     selfask     math_selfask_v1               338               18              False     7.326
+gsm8k_selfask_2       gsm8k     selfask     math_selfask_v1               3                 3               True      1.372
+gsm8k_selfask_3       gsm8k     selfask     math_selfask_v1               65000             70000           False     1.692
+gsm8k_selfask_4       gsm8k     selfask     math_selfask_v1               3                 540             False     1.356
+gsm8k_selfask_5       gsm8k     selfask     math_selfask_v1               16                64              False     2.777
+gsm8k_direct_1        gsm8k     direct      math_direct_prompt            9                 18              False     0.41
+gsm8k_direct_2        gsm8k     direct      math_direct_prompt            +1                3               False     0.291
+gsm8k_direct_3        gsm8k     direct      math_direct_prompt            70000             70000           True      2.005
+gsm8k_direct_4        gsm8k     direct      math_direct_prompt            1                 540             False     0.19
+gsm8k_direct_5        gsm8k     direct      math_direct_prompt            78                64              False     1.028
+finqa_selfask_1       finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.758
+gsm8k_direct_1        gsm8k     direct      math_direct_prompt            9                 18              False     0.41
+gsm8k_direct_2        gsm8k     direct      math_direct_prompt            +1                3               False     0.291
+gsm8k_direct_3        gsm8k     direct      math_direct_prompt            70000             70000           True      2.005
+gsm8k_direct_4        gsm8k     direct      math_direct_prompt            1                 540             False     0.19
+gsm8k_direct_5        gsm8k     direct      math_direct_prompt            78                64              False     1.028
+finqa_selfask_1       finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.758
+finqa_selfask_2       finqa     selfask     finance_selfask_v1            70.8%             93.5%           False     4.633
+gsm8k_direct_1        gsm8k     direct      math_direct_prompt            9                 18              False     0.41
+gsm8k_direct_2        gsm8k     direct      math_direct_prompt            +1                3               False     0.291
+gsm8k_direct_3        gsm8k     direct      math_direct_prompt            70000             70000           True      2.005
+gsm8k_direct_4        gsm8k     direct      math_direct_prompt            1                 540             False     0.19
+gsm8k_direct_5        gsm8k     direct      math_direct_prompt            78                64              False     1.028
+finqa_selfask_1       finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.758
+gsm8k_direct_2        gsm8k     direct      math_direct_prompt            +1                3               False     0.291
+gsm8k_direct_3        gsm8k     direct      math_direct_prompt            70000             70000           True      2.005
+gsm8k_direct_4        gsm8k     direct      math_direct_prompt            1                 540             False     0.19
+gsm8k_direct_5        gsm8k     direct      math_direct_prompt            78                64              False     1.028
+finqa_selfask_1       finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.758
+gsm8k_direct_3        gsm8k     direct      math_direct_prompt            70000             70000           True      2.005
+gsm8k_direct_4        gsm8k     direct      math_direct_prompt            1                 540             False     0.19
+gsm8k_direct_5        gsm8k     direct      math_direct_prompt            78                64              False     1.028
+finqa_selfask_1       finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.758
+gsm8k_direct_5        gsm8k     direct      math_direct_prompt            78                64              False     1.028
+finqa_selfask_1       finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.758
+finqa_selfask_1       finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.758
+finqa_selfask_2       finqa     selfask     finance_selfask_v1            70.8%             93.5%           False     4.633
+finqa_selfask_2       finqa     selfask     finance_selfask_v1            70.8%             93.5%           False     4.633
+finqa_selfask_3       finqa     selfask     finance_selfask_v1            24.7%             24.69%          True      5.019
+finqa_selfask_4       finqa     selfask     finance_selfask_v1            2009              18.6            False     4.738
+finqa_selfask_3       finqa     selfask     finance_selfask_v1            24.7%             24.69%          True      5.019
+finqa_selfask_4       finqa     selfask     finance_selfask_v1            2009              18.6            False     4.738
+finqa_selfask_4       finqa     selfask     finance_selfask_v1            2009              18.6            False     4.738
+finqa_selfask_5       finqa     selfask     finance_selfask_v1            60.23%            60.3%           True      3.681
+finqa_direct_1        finqa     direct      finance_direct_prompt         2019              127.40          False     1.113
+finqa_direct_2        finqa     direct      finance_direct_prompt         59%               93.5%           False     2.366
+finqa_direct_3        finqa     direct      finance_direct_prompt         4.5%              24.69%          False     0.671
+finqa_direct_4        finqa     direct      finance_direct_prompt         2010              18.6            False     0.622
+finqa_direct_5        finqa     direct      finance_direct_prompt         200000            60.3%           False     1.256
+
+Saved raw outputs to: raws.json
+
+Done. Ensure Self-Ask and Direct templates end with a single final line 'Answer: <value>' to keep extraction stable across prompt families.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json "raws.json"   
+
+=== Running Self-Ask / Direct / Program(PoT) prompts (GSM8K + FinQA) ===
+Model: mistral:7b-instruct
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+Running GSM8K with math/selfask: math_selfask_v1
+Running GSM8K with math/direct: math_direct_prompt
+
+Running FinQA with finance/selfask: finance_selfask_v1
+Traceback (most recent call last):
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 545, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 497, in main
+    run_batch(fin_norm, fin_selfask, "finqa", "selfask")
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 410, in run_batch
+    res = run_one(ex, prompt_obj, domain_tag)
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 365, in run_one
+    completion, llm_latency = ollama_generate(args.model, full_prompt, options)
+                              ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 129, in ollama_generate
+    r = requests.post(url, json=payload, timeout=600)
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\urllib3\connection.py", line 565, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\Siddh\miniconda3\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Siddh\miniconda3\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Siddh\miniconda3\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Siddh\miniconda3\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+KeyboardInterrupt
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json "raws.json"
+
+=== Running Self-Ask / Direct / Program(PoT) prompts (GSM8K + FinQA) ===
+Model: mistral:7b-instruct
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+Running GSM8K with math/selfask: math_selfask_v1
+Running GSM8K with math/direct: math_direct_prompt
+
+Running FinQA with finance/selfask: finance_selfask_v1
+Running FinQA with finance/direct: finance_direct_prompt
+
+=== Summary (ok@1% tolerance) ===
+item_id                 domain    ptype       prompt_id                     pred              gold            ok@1%     llm_s       py_s        total_s
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+gsm8k_selfask_1         gsm8k     selfask     math_selfask_v1               338               18              False     2.478       0.0         2.478
+gsm8k_selfask_2         gsm8k     selfask     math_selfask_v1               3                 3               True      1.371       0.0         1.371
+gsm8k_selfask_3         gsm8k     selfask     math_selfask_v1               65000             70000           False     1.688       0.0         1.688
+gsm8k_selfask_4         gsm8k     selfask     math_selfask_v1               3                 540             False     1.353       0.0         1.353
+gsm8k_selfask_5         gsm8k     selfask     math_selfask_v1               16                64              False     2.779       0.0         2.779
+gsm8k_direct_1          gsm8k     direct      math_direct_prompt            9                 18              False     0.409       0.0         0.409
+gsm8k_direct_2          gsm8k     direct      math_direct_prompt            +1                3               False     0.291       0.0         0.291
+gsm8k_direct_3          gsm8k     direct      math_direct_prompt            70000             70000           True      2.006       0.0         2.006
+gsm8k_direct_4          gsm8k     direct      math_direct_prompt            1                 540             False     0.189       0.0         0.189
+gsm8k_direct_5          gsm8k     direct      math_direct_prompt            78                64              False     1.028       0.0         1.028
+finqa_selfask_1         finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.736       0.0         2.736
+finqa_selfask_2         finqa     selfask     finance_selfask_v1            70.8%             93.5%           False     4.636       0.0         4.636
+finqa_selfask_3         finqa     selfask     finance_selfask_v1            24.7%             24.69%          True      5.016       0.0         5.016
+finqa_selfask_4         finqa     selfask     finance_selfask_v1            2009              18.6            False     4.743       0.0         4.743
+finqa_selfask_5         finqa     selfask     finance_selfask_v1            60.23%            60.3%           True      3.681       0.0         3.681
+finqa_direct_1          finqa     direct      finance_direct_prompt         123               127.40          False     0.688       0.0         0.688
+finqa_direct_2          finqa     direct      finance_direct_prompt         40%               93.5%           False     2.125       0.0         2.125
+finqa_direct_3          finqa     direct      finance_direct_prompt         5.7%              24.69%          False     0.622       0.0         0.622
+finqa_direct_4          finqa     direct      finance_direct_prompt         2010              18.6            False     0.671       0.0         0.671
+finqa_direct_5          finqa     direct      finance_direct_prompt         200000            60.3%           False     1.281       0.0         1.281
+
+Saved raw outputs to: raws.json
+
+Done. PoT runs depend on your prompt emitting a single fenced python code block that prints the numeric answer.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --save_json "raws.json"^C
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --model llama3.1:8b --enable_pot --show_flow
+
+=== Running Self-Ask / Direct / Program(PoT) prompts (GSM8K + FinQA) ===
+Model: llama3.1:8b
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+Running GSM8K with math/selfask: math_selfask_v1
+========================================================================================
+[gsm8k_selfask_1] Prompt: math_selfask_v1
+----------------------------------------------------------------------------------------
+>> FULL COMPLETION:
+Step 1:
+- What is the total number of eggs laid by Janet's ducks per day?
+- How many eggs does Janet eat for breakfast every morning?
+- How many eggs does Janet bake for her friends every day?
+- How many eggs remain after Janet eats and bakes some?
+
+Step 2:
+- The total number of eggs laid by Janet's ducks is given as 16.
+- Janet eats 3 eggs for breakfast, so she has 16 - 3 = 13 eggs left.
+- She then bakes 4 eggs for her friends, leaving her with 13 - 4 = 9 eggs.
+
+Step 3:
+- The number of eggs remaining after Janet eats and bakes some is 9.
+- Janet sells these at $2 per egg. So she makes 9 * $2 = $18 every day at the farmers' market.
+
+The final answer is: $\boxed{18}$
+
+>> PARSED SELF-ASK FLOW (best-effort):
+  Sub-questions:
+    Q1. What is the total number of eggs laid by Janet's ducks per day?
+    Q2. How many eggs does Janet eat for breakfast every morning?
+    Q3. How many eggs does Janet bake for her friends every day?
+    Q4. How many eggs remain after Janet eats and bakes some?
+    Q5. The total number of eggs laid by Janet's ducks is given as 16.
+    Q6. Janet eats 3 eggs for breakfast, so she has 16 - 3 = 13 eggs left.
+    Q7. She then bakes 4 eggs for her friends, leaving her with 13 - 4 = 9 eggs.
+    Q8. The number of eggs remaining after Janet eats and bakes some is 9.
+    Q9. Janet sells these at $2 per egg. So she makes 9 * $2 = $18 every day at the farmers' market.
+----------------------------------------------------------------------------------------
+Extracted pred = 18   |   GOLD = 18   |   ok@1% = True
+LLM latency = 8.32s  |  Py latency = 0.00s  |  Total = 8.32s
+========================================================================================
+
+========================================================================================
+[gsm8k_selfask_2] Prompt: math_selfask_v1
+----------------------------------------------------------------------------------------
+>> FULL COMPLETION:
+Step 1:
+- What is the amount of blue fiber needed for one robe?
+- How much white fiber is required in comparison to the blue fiber?
+
+Step 2:
+- The problem states that it takes 2 bolts of blue fiber. Therefore, the answer to the first sub-question is 2.
+- It mentions that half as much white fiber is used compared to blue fiber. Since we have determined that 2 bolts are needed for blue fiber, half of this amount would be 1 bolt.
+
+Step 3:
+- To find the total number of bolts required, we need to add the amount of blue and white fiber together.
+- The problem states that it takes 2 bolts of blue fiber and 1 bolt of white fiber. Therefore, the final answer is 2 + 1 = 3.
+
+Final line: Answer: 3
+
+>> PARSED SELF-ASK FLOW (best-effort):
+  Sub-questions:
+    Q1. What is the amount of blue fiber needed for one robe?
+    Q2. How much white fiber is required in comparison to the blue fiber?
+    Q3. The problem states that it takes 2 bolts of blue fiber. Therefore, the answer to the first sub-question is 2.
+    Q4. It mentions that half as much white fiber is used compared to blue fiber. Since we have determined that 2 bolts are needed for blue fiber, half of this amount would be 1 bolt.
+    Q5. To find the total number of bolts required, we need to add the amount of blue and white fiber together.
+    Q6. The problem states that it takes 2 bolts of blue fiber and 1 bolt of white fiber. Therefore, the final answer is 2 + 1 = 3.
+----------------------------------------------------------------------------------------
+Extracted pred = 3   |   GOLD = 3   |   ok@1% = True
+LLM latency = 1.73s  |  Py latency = 0.00s  |  Total = 1.73s
+========================================================================================
+
+========================================================================================
+[gsm8k_selfask_3] Prompt: math_selfask_v1
+----------------------------------------------------------------------------------------
+>> FULL COMPLETION:
+To solve this problem, we need to follow a step-by-step approach.
+
+**Step 1: List sub-questions.**
+
+1. What is the original value of the house?
+2. How much did Josh spend on repairs?
+3. By how much was the value of the house increased by the repairs?
+4. What is the new value of the house after the repairs?
+5. How much profit did Josh make?
+
+**Step 2: Answer sub-questions.**
+
+1. The original value of the house is $80,000.
+2. Josh spent $50,000 on repairs.
+3. The value of the house was increased by 150%.
+4. To calculate the new value of the house, we need to find 150% of $80,000 and add it to the original value:
+   New Value = Original Value + (Original Value x Increase Percentage)
+   New Value = $80,000 + ($80,000 x 1.5)
+   New Value = $80,000 + $120,000
+   New Value = $200,000
+5. To find the profit Josh made, we need to subtract the total cost (original value + repairs) from the new value:
+   Profit = New Value - Total Cost
+   Profit = $200,000 - ($80,000 + $50,000)
+   Profit = $70,000
+
+**Step 3: Combine into final result.**
+
+Answer: $70,000
+
+>> PARSED SELF-ASK FLOW (best-effort):
+  Sub-questions:
+    Q1. 1. What is the original value of the house?
+    Q2. 2. How much did Josh spend on repairs?
+    Q3. 3. By how much was the value of the house increased by the repairs?
+    Q4. 4. What is the new value of the house after the repairs?
+    Q5. 5. How much profit did Josh make?
+  Intermediate answers:
+    A1. $70,000
+----------------------------------------------------------------------------------------
+Extracted pred = 70000   |   GOLD = 70000   |   ok@1% = True
+LLM latency = 2.96s  |  Py latency = 0.00s  |  Total = 2.96s
+========================================================================================
+
+========================================================================================
+[gsm8k_selfask_4] Prompt: math_selfask_v1
+----------------------------------------------------------------------------------------
+>> FULL COMPLETION:
+To solve this problem, we need to break it down step by step.
+
+## Step 1: Determine the number of sprints James runs in a week
+James decides to run 3 sprints 3 times a week. So, he runs a total of 3 * 3 = 9 sprints per week.
+
+## Step 2: Calculate the total meters James runs in a week
+Since each sprint is 60 meters and he does 9 sprints per week, we multiply the number of sprints by the distance of each sprint to get the total distance. So, 9 * 60 = 540 meters.
+
+The final answer is: $\boxed{540}$
+----------------------------------------------------------------------------------------
+Extracted pred = 540   |   GOLD = 540   |   ok@1% = True
+LLM latency = 1.41s  |  Py latency = 0.00s  |  Total = 1.41s
+========================================================================================
+
+========================================================================================
+[gsm8k_selfask_5] Prompt: math_selfask_v1
+----------------------------------------------------------------------------------------
+>> FULL COMPLETION:
+To solve this problem, we will follow the steps you've outlined.
+
+## Step 1: Determine how many glasses are full price and how many are discounted
+Kylar wants to buy 16 glasses. Since every second glass costs only 60% of the price, we can divide the total number of glasses by 2 to find out how many are at full price and how many are discounted.
+
+## Step 2: Calculate the cost of the full-price glasses
+One glass costs $5. Therefore, the cost of one full-price glass is $5.
+
+## Step 3: Calculate the cost of the discounted glasses
+Since every second glass is discounted by 40% (100% - 60%), we need to calculate the price of a discounted glass first. The price of a discounted glass is 60% of $5, which is 0.6 * $5 = $3.
+
+## Step 4: Determine how many full-price and discounted glasses Kylar will buy
+Since there are 16 glasses in total, we can divide this number by 2 to find out that Kylar will buy 8 full-price glasses and 8 discounted glasses.
+
+## Step 5: Calculate the cost of all the glasses
+To calculate the total cost, we need to multiply the number of each type of glass by its price and then add these two amounts together. The cost of the full-price glasses is 8 * $5 = $40. The cost of the discounted glasses is 8 * $3 = $24.
+
+## Step 6: Add the costs of the full-price and discounted glasses
+The total cost that Kylar needs to pay for all 16 glasses is $40 + $24 = $64.
+
+The final answer is: $\boxed{64}$
+----------------------------------------------------------------------------------------
+Extracted pred = 64   |   GOLD = 64   |   ok@1% = True
+LLM latency = 3.57s  |  Py latency = 0.00s  |  Total = 3.57s
+========================================================================================
+
+Running GSM8K with math/direct: math_direct_prompt
+Traceback (most recent call last):
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 545, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 488, in main
+    run_batch(gsm_norm, math_direct, "gsm8k", "direct")
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 410, in run_batch
+    res = run_one(ex, prompt_obj, domain_tag)
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 365, in run_one
+    completion, llm_latency = ollama_generate(args.model, full_prompt, options)
+                              ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 129, in ollama_generate
+    r = requests.post(url, json=payload, timeout=600)
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "C:\Users\Siddh\miniconda3\Lib\site-packages\urllib3\connection.py", line 565, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\Siddh\miniconda3\Lib\http\client.py", line 1428, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\Siddh\miniconda3\Lib\http\client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Siddh\miniconda3\Lib\http\client.py", line 292, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Siddh\miniconda3\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+KeyboardInterrupt
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --model llama3.1:8b --enable_pot --save_json "raws.json"
+
+=== Running Self-Ask / Direct / Program(PoT) prompts (GSM8K + FinQA) ===
+Model: llama3.1:8b
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+
+Running GSM8K with math/selfask: math_selfask_v1
+Running GSM8K with math/direct: math_direct_prompt
+Running GSM8K with math/program( PoT ): math_program_v1
+
+Running FinQA with finance/selfask: finance_selfask_v1
+Running FinQA with finance/direct: finance_direct_prompt
+Running FinQA with finance/program( PoT ): finance_program_v1
+
+=== Summary (ok@1% tolerance) ===
+item_id                 domain    ptype       prompt_id                     pred              gold            ok@1%     llm_s       py_s        total_s
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+gsm8k_selfask_1         gsm8k     selfask     math_selfask_v1               18                18              True      2.191       0.0         2.191
+gsm8k_selfask_2         gsm8k     selfask     math_selfask_v1               3                 3               True      1.726       0.0         1.726
+gsm8k_selfask_3         gsm8k     selfask     math_selfask_v1               70000             70000           True      2.952       0.0         2.952
+gsm8k_selfask_4         gsm8k     selfask     math_selfask_v1               540               540             True      1.399       0.0         1.399
+gsm8k_selfask_5         gsm8k     selfask     math_selfask_v1               64                64              True      3.564       0.0         3.564
+gsm8k_direct_1          gsm8k     direct      math_direct_prompt            18                18              True      2.463       0.0         2.463
+gsm8k_direct_2          gsm8k     direct      math_direct_prompt            3                 3               True      1.22        0.0         1.22
+gsm8k_direct_3          gsm8k     direct      math_direct_prompt            0                 70000           False     3.382       0.0         3.382
+gsm8k_direct_4          gsm8k     direct      math_direct_prompt            540               540             True      1.978       0.0         1.978
+gsm8k_direct_5          gsm8k     direct      math_direct_prompt            64                64              True      2.566       0.0         2.566
+gsm8k_program_1         gsm8k     program     math_program_v1               18                18              True      2.805       0.0         2.805
+gsm8k_program_2         gsm8k     program     math_program_v1               3                 3               True      1.77        0.0         1.77
+gsm8k_program_3         gsm8k     program     math_program_v1               65000             70000           False     2.608       0.0         2.608
+gsm8k_program_4         gsm8k     program     math_program_v1               180               540             False     1.703       0.0         1.703
+gsm8k_program_5         gsm8k     program     math_program_v1               64                64              True      3.289       0.0         3.289
+finqa_selfask_1         finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.561       0.0         2.561
+finqa_selfask_2         finqa     selfask     finance_selfask_v1            116               93.5%           False     5.061       0.0         5.061
+finqa_selfask_3         finqa     selfask     finance_selfask_v1            24.68%            24.69%          True      2.799       0.0         2.799
+gsm8k_program_3         gsm8k     program     math_program_v1               65000             70000           False     2.608       0.0         2.608
+gsm8k_program_4         gsm8k     program     math_program_v1               180               540             False     1.703       0.0         1.703
+gsm8k_program_5         gsm8k     program     math_program_v1               64                64              True      3.289       0.0         3.289
+finqa_selfask_1         finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.561       0.0         2.561
+finqa_selfask_2         finqa     selfask     finance_selfask_v1            116               93.5%           False     5.061       0.0         5.061
+finqa_selfask_3         finqa     selfask     finance_selfask_v1            24.68%            24.69%          True      2.799       0.0         2.799
+finqa_selfask_4         finqa     selfask     finance_selfask_v1            18.6              18.6            True      2.432       0.0         2.432
+finqa_selfask_5         finqa     selfask     finance_selfask_v1            60.2%             60.3%           True      2.66        0.0         2.66
+finqa_direct_1          finqa     direct      finance_direct_prompt         90                127.40          False     0.434       0.0         0.434
+finqa_direct_2          finqa     direct      finance_direct_prompt         3                 93.5%           False     4.941       0.0         4.941
+finqa_direct_3          finqa     direct      finance_direct_prompt         11.35             24.69%          False     1.783       0.0         1.783
+finqa_direct_4          finqa     direct      finance_direct_prompt         2010              18.6            False     0.345       0.0         0.345
+gsm8k_program_3         gsm8k     program     math_program_v1               65000             70000           False     2.608       0.0         2.608
+gsm8k_program_4         gsm8k     program     math_program_v1               180               540             False     1.703       0.0         1.703
+gsm8k_program_5         gsm8k     program     math_program_v1               64                64              True      3.289       0.0         3.289
+finqa_selfask_1         finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.561       0.0         2.561
+finqa_selfask_2         finqa     selfask     finance_selfask_v1            116               93.5%           False     5.061       0.0         5.061
+finqa_selfask_3         finqa     selfask     finance_selfask_v1            24.68%            24.69%          True      2.799       0.0         2.799
+finqa_selfask_4         finqa     selfask     finance_selfask_v1            18.6              18.6            True      2.432       0.0         2.432
+finqa_selfask_5         finqa     selfask     finance_selfask_v1            60.2%             60.3%           True      2.66        0.0         2.66
+finqa_direct_1          finqa     direct      finance_direct_prompt         90                127.40          False     0.434       0.0         0.434
+finqa_direct_2          finqa     direct      finance_direct_prompt         3                 93.5%           False     4.941       0.0         4.941
+finqa_direct_3          finqa     direct      finance_direct_prompt         11.35             24.69%          False     1.783       0.0         1.783
+gsm8k_program_3         gsm8k     program     math_program_v1               65000             70000           False     2.608       0.0         2.608
+gsm8k_program_4         gsm8k     program     math_program_v1               180               540             False     1.703       0.0         1.703
+gsm8k_program_5         gsm8k     program     math_program_v1               64                64              True      3.289       0.0         3.289
+finqa_selfask_1         finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.561       0.0         2.561
+finqa_selfask_2         finqa     selfask     finance_selfask_v1            116               93.5%           False     5.061       0.0         5.061
+finqa_selfask_3         finqa     selfask     finance_selfask_v1            24.68%            24.69%          True      2.799       0.0         2.799
+finqa_selfask_4         finqa     selfask     finance_selfask_v1            18.6              18.6            True      2.432       0.0         2.432
+finqa_selfask_5         finqa     selfask     finance_selfask_v1            60.2%             60.3%           True      2.66        0.0         2.66
+finqa_direct_1          finqa     direct      finance_direct_prompt         90                127.40          False     0.434       0.0         0.434
+gsm8k_program_3         gsm8k     program     math_program_v1               65000             70000           False     2.608       0.0         2.608
+gsm8k_program_4         gsm8k     program     math_program_v1               180               540             False     1.703       0.0         1.703
+gsm8k_program_5         gsm8k     program     math_program_v1               64                64              True      3.289       0.0         3.289
+finqa_selfask_1         finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.561       0.0         2.561
+finqa_selfask_2         finqa     selfask     finance_selfask_v1            116               93.5%           False     5.061       0.0         5.061
+finqa_selfask_3         finqa     selfask     finance_selfask_v1            24.68%            24.69%          True      2.799       0.0         2.799
+finqa_selfask_4         finqa     selfask     finance_selfask_v1            18.6              18.6            True      2.432       0.0         2.432
+gsm8k_program_5         gsm8k     program     math_program_v1               64                64              True      3.289       0.0         3.289
+finqa_selfask_1         finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.561       0.0         2.561
+finqa_selfask_2         finqa     selfask     finance_selfask_v1            116               93.5%           False     5.061       0.0         5.061
+finqa_selfask_3         finqa     selfask     finance_selfask_v1            24.68%            24.69%          True      2.799       0.0         2.799
+finqa_selfask_1         finqa     selfask     finance_selfask_v1            127.4             127.40          True      2.561       0.0         2.561
+finqa_selfask_2         finqa     selfask     finance_selfask_v1            116               93.5%           False     5.061       0.0         5.061
+finqa_selfask_3         finqa     selfask     finance_selfask_v1            24.68%            24.69%          True      2.799       0.0         2.799
+finqa_selfask_2         finqa     selfask     finance_selfask_v1            116               93.5%           False     5.061       0.0         5.061
+finqa_selfask_3         finqa     selfask     finance_selfask_v1            24.68%            24.69%          True      2.799       0.0         2.799
+finqa_selfask_3         finqa     selfask     finance_selfask_v1            24.68%            24.69%          True      2.799       0.0         2.799
+finqa_selfask_4         finqa     selfask     finance_selfask_v1            18.6              18.6            True      2.432       0.0         2.432
+finqa_selfask_5         finqa     selfask     finance_selfask_v1            60.2%             60.3%           True      2.66        0.0         2.66
+finqa_direct_1          finqa     direct      finance_direct_prompt         90                127.40          False     0.434       0.0         0.434
+finqa_direct_2          finqa     direct      finance_direct_prompt         3                 93.5%           False     4.941       0.0         4.941
+finqa_direct_3          finqa     direct      finance_direct_prompt         11.35             24.69%          False     1.783       0.0         1.783
+finqa_direct_4          finqa     direct      finance_direct_prompt         2010              18.6            False     0.345       0.0         0.345
+finqa_direct_5          finqa     direct      finance_direct_prompt         100               60.3%           False     1.818       0.0         1.818
+finqa_program_1         finqa     program     finance_program_v1            127.4             127.40          True      1.732       0.0         1.732
+finqa_program_2         finqa     program     finance_program_v1            152.3             93.5%           False     5.061       0.0         5.061
+finqa_program_3         finqa     program     finance_program_v1            24.69%            24.69%          True      1.894       0.0         1.894
+finqa_program_4         finqa     program     finance_program_v1            18.6              18.6            True      2.507       0.0         2.507
+finqa_program_5         finqa     program     finance_program_v1            60.2%             60.3%           True      2.308       0.0         2.308
+
+Saved raw outputs to: raws.json
+
+Done. PoT runs depend on your prompt emitting a single fenced python code block that prints the numeric answer.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --model llama3.1:8b --enable_pot --save_json "raws.json"
+
+=== Running prompts (Self-Ask / Direct / Program[PoT]) on GSM8K + FinQA ===
+Model: llama3.1:8b
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+enable_pot=True
+
+Running GSM8K with math hybrid PoT: math_hybrid_selfask_pot_v1
+Running GSM8K with math/selfask: math_selfask_v1
+Running GSM8K with math/direct: math_direct_prompt
+Running GSM8K with math/program (PoT): math_program_v1
+
+Running FinQA with finance hybrid PoT: finance_hybrid_selfask_pot_v1
+Running FinQA with finance/selfask: finance_selfask_v1
+Running FinQA with finance/direct: finance_direct_prompt
+Running FinQA with finance/program (PoT): finance_program_v1
+
+=== Summary (ok@1% tolerance) ===
+item_id                 domain    ptype       prompt_id                         pred              gold            ok@1%     llm_s       py_s        total_s
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+gsm8k_hybrid_pot_1      gsm8k     program     math_hybrid_selfask_pot_v1        2                 18              False     4.118       0.036       4.154
+gsm8k_hybrid_pot_2      gsm8k     program     math_hybrid_selfask_pot_v1        3.0               3               True      2.01        0.029       2.039
+gsm8k_hybrid_pot_3      gsm8k     program     math_hybrid_selfask_pot_v1        -28000.0          70000           False     2.349       0.029       2.378
+gsm8k_hybrid_pot_4      gsm8k     program     math_hybrid_selfask_pot_v1        60                540             False     1.465       0.033       1.498
+gsm8k_hybrid_pot_5      gsm8k     program     math_hybrid_selfask_pot_v1        64.0              64              True      3.531       0.029       3.56
+gsm8k_selfask_1         gsm8k     selfask     math_selfask_v1                   18                18              True      1.721       0.0         1.721
+gsm8k_selfask_2         gsm8k     selfask     math_selfask_v1                   3                 3               True      1.834       0.0         1.834
+gsm8k_selfask_3         gsm8k     selfask     math_selfask_v1                   70000             70000           True      2.949       0.0         2.949
+gsm8k_selfask_4         gsm8k     selfask     math_selfask_v1                   540               540             True      2.194       0.0         2.194
+gsm8k_selfask_5         gsm8k     selfask     math_selfask_v1                   64                64              True      1.873       0.0         1.873
+gsm8k_direct_1          gsm8k     direct      math_direct_prompt                18                18              True      1.924       0.0         1.924
+gsm8k_direct_2          gsm8k     direct      math_direct_prompt                3                 3               True      1.191       0.0         1.191
+gsm8k_direct_3          gsm8k     direct      math_direct_prompt                70000             70000           True      2.719       0.0         2.719
+gsm8k_direct_4          gsm8k     direct      math_direct_prompt                540               540             True      1.493       0.0         1.493
+gsm8k_direct_5          gsm8k     direct      math_direct_prompt                64                64              True      3.04        0.0         3.04
+gsm8k_program_1         gsm8k     program     math_program_v1                   18                18              True      2.945       0.0         2.945
+gsm8k_program_2         gsm8k     program     math_program_v1                   3                 3               True      2.063       0.0         2.063
+gsm8k_program_3         gsm8k     program     math_program_v1                   50000             70000           False     2.2         0.0         2.2
+gsm8k_program_4         gsm8k     program     math_program_v1                   180               540             False     2.471       0.0         2.471
+gsm8k_program_5         gsm8k     program     math_program_v1                   64                64              True      2.596       0.0         2.596
+finqa_hybrid_pot_1      finqa     program     finance_hybrid_selfask_pot_v1     127.4             127.40          True      1.971       0.028       1.999
+finqa_hybrid_pot_2      finqa     program     finance_hybrid_selfask_pot_v1     0.5230000000000001  93.5%           False     1.055       0.029       1.084
+finqa_hybrid_pot_3      finqa     program     finance_hybrid_selfask_pot_v1     24.691358024691358  24.69%          False     2.144       0.028       2.172
+finqa_hybrid_pot_4      finqa     program     finance_hybrid_selfask_pot_v1     0.03465623253214069  18.6            False     1.887       0.029       1.916
+finqa_hybrid_pot_5      finqa     program     finance_hybrid_selfask_pot_v1     60.30612244897959  60.3%           False     2.16        0.028       2.188
+finqa_selfask_1         finqa     selfask     finance_selfask_v1                127.4             127.40          True      2.295       0.0         2.295
+finqa_selfask_2         finqa     selfask     finance_selfask_v1                0                 93.5%           False     5.055       0.0         5.055
+finqa_selfask_3         finqa     selfask     finance_selfask_v1                24.69%            24.69%          True      2.796       0.0         2.796
+finqa_selfask_4         finqa     selfask     finance_selfask_v1                18.6              18.6            True      2.391       0.0         2.391
+finqa_selfask_5         finqa     selfask     finance_selfask_v1                60.2%             60.3%           True      2.678       0.0         2.678
+finqa_direct_1          finqa     direct      finance_direct_prompt             92.50             127.40          False     0.45        0.0         0.45
+finqa_direct_2          finqa     direct      finance_direct_prompt             144.5             93.5%           False     4.477       0.0         4.477
+finqa_direct_3          finqa     direct      finance_direct_prompt             -5%               24.69%          False     2.718       0.0         2.718
+finqa_direct_4          finqa     direct      finance_direct_prompt             2010              18.6            False     0.432       0.0         0.432
+finqa_direct_5          finqa     direct      finance_direct_prompt             100               60.3%           False     2.57        0.0         2.57
+finqa_program_1         finqa     program     finance_program_v1                127.4             127.40          True      1.817       0.0         1.817
+finqa_program_2         finqa     program     finance_program_v1                152.3             93.5%           False     5.054       0.0         5.054
+finqa_program_3         finqa     program     finance_program_v1                24.7%             24.69%          True      2.117       0.0         2.117
+finqa_program_4         finqa     program     finance_program_v1                18.6              18.6            True      2.654       0.0         2.654
+finqa_program_5         finqa     program     finance_program_v1                60.3%             60.3%           True      2.716       0.0         2.716
+
+Saved raw outputs to: raws.json
+
+Done. PoT runs depend on your prompt emitting a single fenced python code block that prints the numeric answer.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --model llama3.1:8b --enable_pot --save_json "raws.json"
+
+=== Running prompts (Self-Ask / Direct / Program[PoT]) on GSM8K + FinQA ===
+Model: llama3.1:8b
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234
+enable_pot=True
+
+Running GSM8K with math hybrid PoT: math_hybrid_selfask_pot_v1
+Running GSM8K with math/selfask: math_selfask_v1
+Running GSM8K with math/direct: math_direct_prompt
+Running GSM8K with math/program (PoT): math_program_v1
+
+Running FinQA with finance hybrid PoT: finance_hybrid_selfask_pot_v1
+Running FinQA with finance/selfask: finance_selfask_v1
+Running FinQA with finance/direct: finance_direct_prompt
+Running FinQA with finance/program (PoT): finance_program_v1
+
+=== Summary (ok@1% tolerance) ===
+item_id                 domain    ptype       prompt_id                         pred              gold            ok@1%     llm_s       py_s        total_s
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+gsm8k_hybrid_pot_1      gsm8k     program     math_hybrid_selfask_pot_v1        2                 18              False     3.77        0.029       3.799
+gsm8k_hybrid_pot_2      gsm8k     program     math_hybrid_selfask_pot_v1        3.0               3               True      1.98        0.028       2.008
+gsm8k_hybrid_pot_3      gsm8k     program     math_hybrid_selfask_pot_v1        -28000.0          70000           False     2.33        0.028       2.359
+gsm8k_hybrid_pot_4      gsm8k     program     math_hybrid_selfask_pot_v1        60                540             False     1.443       0.029       1.472
+gsm8k_hybrid_pot_5      gsm8k     program     math_hybrid_selfask_pot_v1        64.0              64              True      3.523       0.028       3.551
+gsm8k_selfask_1         gsm8k     selfask     math_selfask_v1                   18                18              True      1.685       0.0         1.685
+gsm8k_selfask_2         gsm8k     selfask     math_selfask_v1                   3                 3               True      1.835       0.0         1.835
+gsm8k_selfask_3         gsm8k     selfask     math_selfask_v1                   70000             70000           True      2.942       0.0         2.942
+gsm8k_selfask_4         gsm8k     selfask     math_selfask_v1                   540               540             True      2.17        0.0         2.17
+gsm8k_selfask_5         gsm8k     selfask     math_selfask_v1                   64                64              True      1.866       0.0         1.866
+gsm8k_direct_1          gsm8k     direct      math_direct_prompt                18                18              True      1.906       0.0         1.906
+gsm8k_direct_2          gsm8k     direct      math_direct_prompt                3                 3               True      1.185       0.0         1.185
+gsm8k_direct_3          gsm8k     direct      math_direct_prompt                70000             70000           True      2.666       0.0         2.666
+gsm8k_direct_4          gsm8k     direct      math_direct_prompt                540               540             True      1.484       0.0         1.484
+gsm8k_direct_5          gsm8k     direct      math_direct_prompt                64                64              True      3.039       0.0         3.039
+gsm8k_program_1         gsm8k     program     math_program_v1                   18                18              True      2.95        0.0         2.95
+gsm8k_program_2         gsm8k     program     math_program_v1                   3                 3               True      2.064       0.0         2.064
+gsm8k_program_3         gsm8k     program     math_program_v1                   50000             70000           False     2.207       0.0         2.207
+gsm8k_program_4         gsm8k     program     math_program_v1                   180               540             False     2.473       0.0         2.473
+gsm8k_program_5         gsm8k     program     math_program_v1                   64                64              True      2.601       0.0         2.601
+finqa_hybrid_pot_1      finqa     program     finance_hybrid_selfask_pot_v1     127.4             127.40          True      1.974       0.028       2.002
+finqa_hybrid_pot_2      finqa     program     finance_hybrid_selfask_pot_v1     0.5230000000000001  93.5%           False     1.056       0.028       1.084
+finqa_hybrid_pot_3      finqa     program     finance_hybrid_selfask_pot_v1     24.691358024691358  24.69%          False     2.144       0.028       2.172
+finqa_hybrid_pot_4      finqa     program     finance_hybrid_selfask_pot_v1     0.03465623253214069  18.6            False     1.89        0.028       1.918
+finqa_hybrid_pot_5      finqa     program     finance_hybrid_selfask_pot_v1     60.30612244897959  60.3%           False     2.162       0.028       2.19
+finqa_selfask_1         finqa     selfask     finance_selfask_v1                127.4             127.40          True      2.294       0.0         2.294
+finqa_selfask_2         finqa     selfask     finance_selfask_v1                0                 93.5%           False     5.06        0.0         5.06
+finqa_selfask_3         finqa     selfask     finance_selfask_v1                24.69%            24.69%          True      2.798       0.0         2.798
+finqa_selfask_4         finqa     selfask     finance_selfask_v1                18.6              18.6            True      2.396       0.0         2.396
+finqa_selfask_5         finqa     selfask     finance_selfask_v1                60.2%             60.3%           True      2.682       0.0         2.682
+finqa_direct_1          finqa     direct      finance_direct_prompt             92.50             127.40          False     0.453       0.0         0.453
+finqa_direct_2          finqa     direct      finance_direct_prompt             144.5             93.5%           False     4.5         0.0         4.5
+finqa_direct_3          finqa     direct      finance_direct_prompt             -5%               24.69%          False     2.718       0.0         2.718
+finqa_direct_4          finqa     direct      finance_direct_prompt             2010              18.6            False     0.429       0.0         0.429
+finqa_direct_5          finqa     direct      finance_direct_prompt             100               60.3%           False     2.574       0.0         2.574
+finqa_program_1         finqa     program     finance_program_v1                127.4             127.40          True      1.837       0.0         1.837
+finqa_program_2         finqa     program     finance_program_v1                152.3             93.5%           False     5.061       0.0         5.061
+finqa_program_3         finqa     program     finance_program_v1                24.7%             24.69%          True      2.121       0.0         2.121
+finqa_program_4         finqa     program     finance_program_v1                18.6              18.6            True      2.643       0.0         2.643
+finqa_program_5         finqa     program     finance_program_v1                60.3%             60.3%           True      2.724       0.0         2.724
+
+Saved raw outputs to: raws.json
+
+Done. PoT runs depend on your prompt emitting a single fenced python code block that prints the numeric answer.
+
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --model llama3.1:8b --sigfig --enable_pot --save_json "raws.json"
+usage: peek_prompts.py [-h] [--prompts PROMPTS] [--model MODEL] [--gsm_path GSM_PATH] [--finqa_path FINQA_PATH] [--take_n TAKE_N] [--num_ctx NUM_CTX] [--num_predict NUM_PREDICT] [--temperature TEMPERATURE] [--seed SEED] [--sigfig SIGFIG] [--show_flow] [--enable_pot] [--hybrid_only] [--save_json SAVE_JSON]
+peek_prompts.py: error: argument --sigfig: expected one argument
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --model llama3.1:8b --sigfig 3 --enable_pot --save_json "raws.json"
+
+=== Running prompts (Self-Ask / Direct / Program[PoT] / Hybrid) on GSM8K + FinQA ===
+Model: llama3.1:8b
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234, sigfig=3
+enable_pot=True
+
+Running GSM8K with HYBRID PoT: math_hybrid_selfask_pot_v1
+Running GSM8K with selfask: math_selfask_v1
+Running GSM8K with direct: math_direct_prompt
+Running GSM8K with program (PoT): math_program_v1
+
+Running FinQA with HYBRID PoT: finance_hybrid_selfask_pot_v1
+Running FinQA with selfask: finance_selfask_v1
+Running FinQA with direct: finance_direct_prompt
+Running FinQA with program (PoT): finance_program_v1
+
+=== Per-item Summary (ok@1% tolerance) ===
+item_id                 domain    style     prompt_id                         pred              gold            ok@1%     llm_s       py_s        total_s
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+gsm8k_hybrid_1          gsm8k     hybrid    math_hybrid_selfask_pot_v1        18                18              True      3.286       0.029       3.315
+gsm8k_hybrid_2          gsm8k     hybrid    math_hybrid_selfask_pot_v1        3                 3               True      0.704       0.028       0.732
+gsm8k_hybrid_3          gsm8k     hybrid    math_hybrid_selfask_pot_v1        65000.0           70000           False     1.542       0.03        1.572
+gsm8k_hybrid_4          gsm8k     hybrid    math_hybrid_selfask_pot_v1        540               540             True      0.79        0.029       0.819
+gsm8k_hybrid_5          gsm8k     hybrid    math_hybrid_selfask_pot_v1        64                64              True      2.018       0.028       2.046
+gsm8k_selfask_1         gsm8k     selfask   math_selfask_v1                   18                18              True      2.689       0.0         2.689
+gsm8k_selfask_2         gsm8k     selfask   math_selfask_v1                   3                 3               True      1.294       0.0         1.294
+gsm8k_selfask_3         gsm8k     selfask   math_selfask_v1                   70000             70000           True      2.856       0.0         2.856
+gsm8k_selfask_4         gsm8k     selfask   math_selfask_v1                   540               540             True      1.633       0.0         1.633
+gsm8k_selfask_5         gsm8k     selfask   math_selfask_v1                   64                64              True      2.473       0.0         2.473
+gsm8k_direct_1          gsm8k     direct    math_direct_prompt                18                18              True      2.162       0.0         2.162
+gsm8k_direct_2          gsm8k     direct    math_direct_prompt                3                 3               True      1.037       0.0         1.037
+gsm8k_direct_3          gsm8k     direct    math_direct_prompt                12000             70000           False     2.501       0.0         2.501
+gsm8k_direct_4          gsm8k     direct    math_direct_prompt                540               540             True      1.149       0.0         1.149
+gsm8k_direct_5          gsm8k     direct    math_direct_prompt                64                64              True      2.155       0.0         2.155
+gsm8k_program_1         gsm8k     program   math_program_v1                   18                18              True      3.252       0.0         3.252
+gsm8k_program_2         gsm8k     program   math_program_v1                   3.00              3               True      3.653       0.028       3.681
+gsm8k_program_3         gsm8k     program   math_program_v1                   50000             70000           False     3.945       0.029       3.974
+gsm8k_program_4         gsm8k     program   math_program_v1                   1080              540             False     2.943       0.028       2.971
+gsm8k_program_5         gsm8k     program   math_program_v1                   64.0              64              True      3.268       0.0         3.268
+finqa_hybrid_1          finqa     hybrid    finance_hybrid_selfask_pot_v1     127.4             127.40          True      2.298       0.028       2.326
+finqa_hybrid_2          finqa     hybrid    finance_hybrid_selfask_pot_v1     0.523             93.5%           False     1.486       0.028       1.514
+finqa_hybrid_3          finqa     hybrid    finance_hybrid_selfask_pot_v1     24.7%             24.69%          True      2.161       0.029       2.19
+finqa_hybrid_4          finqa     hybrid    finance_hybrid_selfask_pot_v1     18.6              18.6            True      1.157       0.028       1.185
+finqa_hybrid_5          finqa     hybrid    finance_hybrid_selfask_pot_v1     60.3              60.3%           False     2.724       0.028       2.752
+finqa_selfask_1         finqa     selfask   finance_selfask_v1                127               127.40          True      2.419       0.0         2.419
+finqa_selfask_2         finqa     selfask   finance_selfask_v1                52.3%             93.5%           False     2.988       0.0         2.988
+finqa_selfask_3         finqa     selfask   finance_selfask_v1                25%               24.69%          False     2.823       0.0         2.823
+finqa_selfask_4         finqa     selfask   finance_selfask_v1                18.6              18.6            True      2.788       0.0         2.788
+finqa_selfask_5         finqa     selfask   finance_selfask_v1                60%               60.3%           True      2.565       0.0         2.565
+finqa_direct_1          finqa     direct    finance_direct_prompt             85.0              127.40          False     0.57        0.0         0.57
+finqa_direct_2          finqa     direct    finance_direct_prompt             49.3%             93.5%           False     2.781       0.0         2.781
+finqa_direct_3          finqa     direct    finance_direct_prompt             0.055             24.69%          False     1.323       0.0         1.323
+finqa_direct_4          finqa     direct    finance_direct_prompt             I need more information about the context of the question. Could you please provide more details or clarify what "net change in net revenue" refers to? This will help me give an accurate answer.
+
+Once I have this information, I'll be happy to assist you and format the response as requested.  18.6            False     0.655       0.0         0.655
+finqa_direct_5          finqa     direct    finance_direct_prompt             However, I don't see any specific data or context provided for the deferred fuel cost revisions and the increase in fuel cost recovery revenues. Could you please provide more information or clarify what you are referring to?
+
+If you provide the necessary data, I'll be happy to help you calculate the percentage of the increase in fuel cost recovery revenues due to deferred fuel cost revisions.
+
+Please note that without specific numbers, I won't be able to provide a numerical answer.  60.3%           False     0.95        0.0         0.95
+finqa_program_1         finqa     program   finance_program_v1                127400000000.0    127.40          False     3.018       0.028       3.047
+finqa_program_2         finqa     program   finance_program_v1                52.3%             93.5%           False     4.374       0.0         4.374
+finqa_program_3         finqa     program   finance_program_v1                24.7%             24.69%          True      2.647       0.0         2.647
+finqa_program_4         finqa     program   finance_program_v1                18.6              18.6            True      2.046       0.0         2.046
+finqa_program_5         finqa     program   finance_program_v1                60.2%             60.3%           True      2.425       0.0         2.425
+
+=== Accuracy by Dataset × Style ===
+dataset   style     accuracy  (N correct / N total)
+------------------------------------------
+GSM8K     selfask   100.0%    (5/5)
+GSM8K     direct    80.0%     (4/5)
+GSM8K     program   60.0%     (3/5)
+GSM8K     hybrid    80.0%     (4/5)
+FinQA     selfask   60.0%     (3/5)
+FinQA     direct    0.0%      (0/5)
+FinQA     program   60.0%     (3/5)
+FinQA     hybrid    60.0%     (3/5)
+Traceback (most recent call last):
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 658, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 640, in main
+    json.dump({
+    ~~~~~~~~~^^
+        "model": args.model,
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+        "buckets": buckets,
+        ^^^^^^^^^^^^^^^^^^^
+    }, f, ensure_ascii=False, indent=2)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Siddh\miniconda3\Lib\json\__init__.py", line 179, in dump
+    for chunk in iterable:
+                 ^^^^^^^^
+  File "C:\Users\Siddh\miniconda3\Lib\json\encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\Siddh\miniconda3\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\Siddh\miniconda3\Lib\json\encoder.py", line 377, in _iterencode_dict
+    raise TypeError(f'keys must be str, int, float, bool or None, '
+                    f'not {key.__class__.__name__}')
+TypeError: keys must be str, int, float, bool or None, not tuple
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> python scripts/peek_prompts.py --model llama3.1:8b --sigfig 3 --enable_pot --save_json "raws.json"
+
+=== Running prompts (Self-Ask / Direct / Program[PoT] / Hybrid) on GSM8K + FinQA ===
+Model: llama3.1:8b
+Decoding: num_ctx=4096, num_predict=512, temperature=0.2, seed=1234, sigfig=3
+enable_pot=True
+
+Running GSM8K with HYBRID PoT: math_hybrid_selfask_pot_v1
+Running GSM8K with selfask: math_selfask_v1
+Running GSM8K with direct: math_direct_prompt
+Running GSM8K with program (PoT): math_program_v1
+
+Running FinQA with HYBRID PoT: finance_hybrid_selfask_pot_v1
+Running FinQA with selfask: finance_selfask_v1
+Running FinQA with direct: finance_direct_prompt
+Running FinQA with program (PoT): finance_program_v1
+
+=== Per-item Summary (ok@1% tolerance) ===
+item_id                 domain    style     prompt_id                         pred              gold            ok@1%     llm_s       py_s        total_s
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+gsm8k_hybrid_1          gsm8k     hybrid    math_hybrid_selfask_pot_v1        18                18              True      4.667       0.056       4.723
+gsm8k_hybrid_2          gsm8k     hybrid    math_hybrid_selfask_pot_v1        3                 3               True      2.097       0.034       2.132
+gsm8k_hybrid_3          gsm8k     hybrid    math_hybrid_selfask_pot_v1        65000             70000           False     2.235       0.034       2.269
+gsm8k_hybrid_4          gsm8k     hybrid    math_hybrid_selfask_pot_v1        540               540             True      2.098       0.034       2.132
+gsm8k_hybrid_5          gsm8k     hybrid    math_hybrid_selfask_pot_v1        64                64              True      2.795       0.034       2.83
+gsm8k_selfask_1         gsm8k     selfask   math_selfask_v1                   18                18              True      3.429       0.0         3.429
+gsm8k_selfask_2         gsm8k     selfask   math_selfask_v1                   3                 3               True      1.359       0.0         1.359
+gsm8k_selfask_3         gsm8k     selfask   math_selfask_v1                   70000             70000           True      2.985       0.0         2.985
+gsm8k_selfask_4         gsm8k     selfask   math_selfask_v1                   540               540             True      2.527       0.0         2.527
+gsm8k_selfask_5         gsm8k     selfask   math_selfask_v1                   64                64              True      3.123       0.0         3.123
+gsm8k_direct_1          gsm8k     direct    math_direct_prompt                18                18              True      2.312       0.0         2.312
+gsm8k_direct_2          gsm8k     direct    math_direct_prompt                3                 3               True      1.081       0.0         1.081
+gsm8k_direct_3          gsm8k     direct    math_direct_prompt                40000             70000           False     2.276       0.0         2.276
+gsm8k_direct_4          gsm8k     direct    math_direct_prompt                540               540             True      1.267       0.0         1.267
+gsm8k_direct_5          gsm8k     direct    math_direct_prompt                64                64              True      2.663       0.0         2.663
+gsm8k_program_1         gsm8k     program   math_program_v1                   18                18              True      3.523       0.0         3.523
+gsm8k_program_2         gsm8k     program   math_program_v1                   6                 3               False     4.975       0.0         4.975
+gsm8k_program_3         gsm8k     program   math_program_v1                   +04               70000           False     4.129       0.029       4.158
+gsm8k_program_4         gsm8k     program   math_program_v1                   540               540             True      3.542       0.028       3.57
+gsm8k_program_5         gsm8k     program   math_program_v1                   80                64              False     3.84        0.0         3.84
+finqa_hybrid_1          finqa     hybrid    finance_hybrid_selfask_pot_v1     127               127.40          True      4.3         0.034       4.335
+finqa_hybrid_2          finqa     hybrid    finance_hybrid_selfask_pot_v1     52.3              93.5%           False     3.947       0.034       3.982
+finqa_hybrid_3          finqa     hybrid    finance_hybrid_selfask_pot_v1     24.7              24.69%          False     4.675       0.034       4.71
+finqa_hybrid_4          finqa     hybrid    finance_hybrid_selfask_pot_v1     18.6              18.6            True      3.575       0.034       3.609
+finqa_hybrid_5          finqa     hybrid    finance_hybrid_selfask_pot_v1     60.3              60.3%           False     3.657       0.034       3.692
+finqa_selfask_1         finqa     selfask   finance_selfask_v1                128               127.40          True      2.288       0.0         2.288
+finqa_selfask_2         finqa     selfask   finance_selfask_v1                52.3              93.5%           False     2.816       0.0         2.816
+finqa_selfask_3         finqa     selfask   finance_selfask_v1                24.7              24.69%          False     2.811       0.0         2.811
+finqa_selfask_4         finqa     selfask   finance_selfask_v1                18.6              18.6            True      2.321       0.0         2.321
+finqa_selfask_5         finqa     selfask   finance_selfask_v1                60.2%             60.3%           True      2.262       0.0         2.262
+finqa_direct_1          finqa     direct    finance_direct_prompt             85                127.40          False     0.509       0.0         0.509
+finqa_direct_2          finqa     direct    finance_direct_prompt             43.35             93.5%           False     4.957       0.0         4.957
+finqa_direct_3          finqa     direct    finance_direct_prompt             0.189             24.69%          False     1.985       0.0         1.985
+finqa_direct_4          finqa     direct    finance_direct_prompt             2010              18.6            False     2.124       0.0         2.124
+finqa_direct_5          finqa     direct    finance_direct_prompt             I don't have enough information to calculate the deferred fuel cost revisions as a percentage of the increase in fuel cost recovery revenues. Can you provide more details or context about this calculation?  60.3%           False     0.444       0.0         0.444
+finqa_program_1         finqa     program   finance_program_v1                127400000000.0    127.40          False     2.94        0.028       2.968
+finqa_program_2         finqa     program   finance_program_v1                52.3%             93.5%           False     3.504       0.0         3.504
+finqa_program_3         finqa     program   finance_program_v1                0.247%            24.69%          False     1.489       0.0         1.489
+finqa_program_4         finqa     program   finance_program_v1                18.6              18.6            True      2.118       0.0         2.118
+finqa_program_5         finqa     program   finance_program_v1                60.2%             60.3%           True      2.478       0.0         2.478
+
+=== Accuracy & Avg Latency by Dataset × Style ===
+dataset   style     accuracy    avg_total_latency  (N correct / N total)
+--------------------------------------------------------
+GSM8K     selfask   100.0%      2.68s         (5/5)
+GSM8K     direct    80.0%       1.92s         (4/5)
+GSM8K     program   40.0%       4.01s         (2/5)
+GSM8K     hybrid    80.0%       2.82s         (4/5)
+FinQA     selfask   60.0%       2.50s         (3/5)
+FinQA     direct    0.0%        2.00s         (0/5)
+FinQA     program   40.0%       2.51s         (2/5)
+FinQA     hybrid    40.0%       4.07s         (2/5)
+Traceback (most recent call last):
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 668, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts\scripts\peek_prompts.py", line 650, in main
+    json.dump({
+    ~~~~~~~~~^^
+        "model": args.model,
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+        "buckets": buckets,
+        ^^^^^^^^^^^^^^^^^^^
+    }, f, ensure_ascii=False, indent=2)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Siddh\miniconda3\Lib\json\__init__.py", line 179, in dump
+    for chunk in iterable:
+                 ^^^^^^^^
+  File "C:\Users\Siddh\miniconda3\Lib\json\encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\Siddh\miniconda3\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\Siddh\miniconda3\Lib\json\encoder.py", line 377, in _iterencode_dict
+    raise TypeError(f'keys must be str, int, float, bool or None, '
+                    f'not {key.__class__.__name__}')
+TypeError: keys must be str, int, float, bool or None, not tuple
+PS C:\Users\Siddh\OneDrive\Desktop\Thesis\slm-crossdomain-prompts> 

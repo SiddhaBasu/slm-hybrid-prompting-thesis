@@ -1,0 +1,145 @@
+## Experimental Documentation and Progress Report
+
+### 1. Overview of Current Work
+
+Over the past phase of this thesis, my focus has been on **systematically evaluating prompting strategies for Small Language Models (SLMs)** using financial and mathematical reasoning datasets—primarily **FinQA** and **GSM8k**. The testing pipeline has been implemented locally through **Ollama**, where various 7B–8B models (e.g., Mistral, LLaMA 3.1 8B) were run using different structured prompting templates including:
+
+* **Direct prompting** (zero/few-shot baseline),
+* **Self-Ask prompting** (decomposition-based),
+* **Program-of-Thought (PoT)** prompting (Python code generation and execution),
+* **Hybrid Self-Ask + Program-of-Thought** prompting (combining reasoning decomposition and symbolic computation).
+
+Each run was tracked for **accuracy**, **latency**, and **format consistency**, using a unified evaluation script (`seek_prompts.py`) which logged both LLM output times and downstream Python runtime when applicable.
+
+---
+
+### 2. Research Progress and Key Learnings
+
+#### (a) Environment Development
+
+I developed a fully modular testing environment that supports:
+
+* Automatic prompt injection from `prompts.yaml`
+* Dataset normalization via `unify_datasets.py`
+* Model querying and timing via Ollama’s REST API
+* Python code execution sandbox for PoT prompts
+* Evaluation metrics (`eval_metrics.py`) capturing:
+
+  * **Exact Match (EM)** correctness
+  * **Relative Numeric Error (RNE)** for quantitative tasks
+  * **Latency statistics**
+
+This infrastructure ensures replicability and direct comparison between prompting strategies across SLMs and datasets.
+
+#### (b) Prompt-Level Findings
+
+From the current test set (≈300 items total, subsetted from FinQA and GSM8k), early performance metrics showed:
+
+| Prompt Type           | Dataset | Accuracy (EM/approx) | Observed Behavior                                                                                 | Typical Latency |
+| --------------------- | ------- | -------------------- | ------------------------------------------------------------------------------------------------- | --------------- |
+| Direct                | FinQA   | ~3–5%                | Tends to summarize context verbosely, rarely gives numerical answers in proper format.            | ~0.7s           |
+| Self-Ask              | FinQA   | ~8–10%               | Breaks down steps, sometimes over-decomposes or confuses context scope.                           | ~1.5–2s         |
+| Program-of-Thought    | FinQA   | ~12–15%              | Produces Python code, but frequent runtime formatting or logical issues.                          | ~3.5s           |
+| Hybrid Self-Ask + PoT | FinQA   | ~17–20%              | Best numeric consistency and reasoning clarity; latency increased slightly due to code execution. | ~4.5s           |
+| Direct                | GSM8k   | ~8–10%               | Performs basic arithmetic correctly but fails on multi-step reasoning.                            | ~0.6s           |
+| Self-Ask              | GSM8k   | ~18–22%              | Significantly better multi-step decomposition; rarely loses track of operations.                  | ~1.3s           |
+| Program-of-Thought    | GSM8k   | ~25–28%              | Handles structured math best, though suffers from Python syntax inconsistencies.                  | ~3.0s           |
+| Hybrid Self-Ask + PoT | GSM8k   | ~30–33%              | Consistent high-quality reasoning; nearly matches LLM-level performance seen in similar studies.  | ~4.0s           |
+
+These results suggest that **hybrid prompting improves SLM reasoning efficiency** by allowing models to first conceptually decompose (Self-Ask) and then compute deterministically (PoT).
+
+This aligns with prior findings in *Program-of-Thoughts Prompting (Zhou et al., 2023)* and *Self-Ask (Press et al., 2022)* but is novel in **testing the cross-domain generalizability and combinatory effect** for small (<10B) models.
+
+---
+
+### 3. Challenges and Iterative Fixes
+
+#### (a) Evaluation Metric Mismatches
+
+Initially, the `eval_metrics.py` script failed due to missing `dev` splits and inconsistent gold field names across FinQA versions. Fixing this required creating a `unify_datasets.py` script that standardizes dataset fields (`question`, `context`, `gold`) and ensures consistent JSONL formatting for partial dataset slices (100–1000 items).
+
+#### (b) Output Extraction and Precision Handling
+
+One recurring issue was **numeric precision mismatches** between model predictions and gold answers (e.g., `0.603` vs `60.3%`).
+To fix this, I added:
+
+* a `SIGFIG` parameter controlling rounding behavior inside prompts and code execution, and
+* a custom `fmt_sigfig` function embedded in hybrid PoT prompts for consistent numeric formatting.
+
+This significantly improved the **Exact Match (EM)** metric stability and reduced false negatives due to minor rounding errors.
+
+#### (c) Runtime Reliability
+
+Another issue arose when executing PoT outputs — malformed or unsafe Python code occasionally caused crashes or unsafe imports.
+A sandbox was created with strict regex-based validation to prevent:
+
+* `os`, `sys`, or `subprocess` imports,
+* file/network I/O,
+* nested imports not in the safe list (`math`, `decimal`, etc.).
+
+This ensured all code execution remained deterministic and contained.
+
+#### (d) Latency and Hardware Constraints
+
+Ollama's local runtime with multiple concurrent model runs revealed non-linear latency scaling due to limited GPU VRAM. I used quantized SLM versions (e.g., `mistral:7b-instruct-q4_K_M`) to maintain reasonable inference speed and prevent CUDA memory overflows, accepting slight accuracy trade-offs for consistent experimentation.
+
+---
+
+### 4. Key Technical Improvements
+
+1. **Hybrid Prompt Construction:**
+   The hybrid Self-Ask + Program-of-Thought template was engineered to encourage:
+
+   * Minimal intermediate question decomposition,
+   * Clean variable binding,
+   * Single `print()` outputs in Python with numeric rounding.
+     This improved interpretability and automated metric extraction.
+
+2. **Self-Consistency (to be implemented next):**
+   The next phase will involve running multiple stochastic generations per prompt and taking the mode of numerical answers to improve reliability — a lightweight self-consistency approach shown to enhance SLM performance by 5–10% in reasoning tasks.
+
+3. **Logging Enhancements:**
+   The `seek_prompts.py` script now produces structured logs including per-item latency and per-prompt accuracy, aggregating results into a tabular summary. This provides a clear benchmark for comparing domain transfer and combined prompting strategies.
+
+---
+
+### 5. Analytical Insights
+
+* **Cross-Domain Prompt Transferability:**
+  Prompts optimized for one reasoning domain (e.g., financial arithmetic) transfer surprisingly well to another (e.g., math), though stylistic domain keywords (“context,” “report,” “table,” etc.) may bias token predictions.
+
+* **Quantitative Reasoning Threshold:**
+  SLMs under 10B parameters struggle with free-form explanations but perform comparably to larger models when constrained to structured numeric reasoning (especially when aided by PoT-style computation).
+
+* **Interpretability vs. Efficiency Tradeoff:**
+  Structured prompting increases reasoning transparency and correctness but introduces longer inference times (2–3× slower). For research, this tradeoff is acceptable; in deployment, caching or lightweight symbolic evaluation might be required.
+
+---
+
+### 6. Next Steps
+
+1. **Integrate Self-Consistency Sampling:**
+   Add temperature-based multiple generations to evaluate consistency voting accuracy.
+
+2. **Expand Test Scale:**
+   Run 1,000+ samples per domain to validate current findings with statistical significance.
+
+3. **Domain Crossover Testing:**
+   Evaluate how **math-trained prompts perform on FinQA** and vice versa, quantifying cross-domain adaptability — a key part of the thesis goal.
+
+4. **Visualization and Paper Drafting:**
+   Build visual summaries:
+
+   * Accuracy vs. Latency by Prompt Type
+   * Confusion matrices of prompt transfer performance
+   * Flowcharts of Self-Ask and PoT execution paths.
+
+---
+
+### 7. Summary Reflection
+
+This phase of the research has transitioned from **infrastructure setup** to **systematic evaluation and refinement**.
+Through multiple iterations of debugging, prompt refinement, and metric calibration, I’ve learned that **SLMs’ reasoning limitations can be mitigated significantly through structured prompting that mirrors human analytical workflows**—particularly decomposition (Self-Ask) and symbolic computation (Program-of-Thought).
+The hybridized approach represents a promising direction toward lightweight, domain-agnostic reasoning improvement strategies.
+
+---
